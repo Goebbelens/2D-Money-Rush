@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControls>())
+        if (collision.tag == "Player")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
