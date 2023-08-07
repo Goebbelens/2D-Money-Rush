@@ -22,6 +22,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     [SerializeField]
     TextMeshProUGUI P4Score;
 
+    private int _playerID = 1;
+
     void Start()
     {
         if (PhotonNetwork.IsConnected)
@@ -35,7 +37,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         int player = 0;
         if (!PhotonNetwork.IsMasterClient)
         {
-            player = 1;
+            player = _playerID;
+            _playerID++;
         }
         GameObject Player = PhotonNetwork.Instantiate("Player", SpawnPoints[player].transform.position, Quaternion.identity);
     }

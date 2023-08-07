@@ -306,7 +306,7 @@ MonoBehaviour:
   m_RotationModel:
     SynchronizeEnabled: 1
     InterpolateOption: 1
-    InterpolateRotateTowardsSpeed: 180
+    InterpolateRotateTowardsSpeed: 720
     InterpolateLerpSpeed: 5
   m_ScaleModel:
     SynchronizeEnabled: 0

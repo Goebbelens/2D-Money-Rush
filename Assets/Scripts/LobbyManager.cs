@@ -16,17 +16,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         searchingPanel.SetActive(false);
-        findMatchBtn.SetActive(false);
-
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("We are connected to Photon! on " + PhotonNetwork.CloudRegion + " Server");
-        PhotonNetwork.AutomaticallySyncScene = true;
         findMatchBtn.SetActive(true);
     }
+
 
     public void FindMatch()
     {
@@ -51,7 +43,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             IsVisible = true,
             IsOpen = true,
-            MaxPlayers = 2
+            MaxPlayers = 4
         };
 
         Hashtable RoomCustomProps = new Hashtable();
@@ -67,9 +59,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2 && PhotonNetwork.IsMasterClient)
         {
-            Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount + "/2 Starting Game");
+            Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount + "/4 Starting Game");
 
             PhotonNetwork.LoadLevel(1);
         }
@@ -79,7 +71,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void StopSearch()
     {
         searchingPanel.SetActive(false);
-        findMatchBtn?.SetActive(true);
+        findMatchBtn.SetActive(true);
         PhotonNetwork.LeaveRoom();
         Debug.Log("Stopped, Back to Menu");
     }
