@@ -26,17 +26,9 @@ public class PlayerShoot : MonoBehaviourPun
     [SerializeField]
     private bool _fireSingle;
 
-    private void Start()
-    {
-        if (!photonView.IsMine)
-        {
-            Destroy(GetComponent<PlayerShoot>());
-        }
-    }
-
     void Update()
     {
-        if(_fireContinuously || _fireSingle)
+        if((_fireContinuously || _fireSingle) && photonView.IsMine)
         {
             float timeSinceLastFire = Time.time - _lastFireTime;
 
